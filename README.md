@@ -2,6 +2,8 @@
 
 The [RDP native training sets](http://rdp.cme.msu.edu/classifier/classifier.jsp;jsessionid=49C6531478DD4D70648EC6FC695B8EA3.10.0.0.9) are typically used for bacteria and archaea, however, the latest Silva reference sequences can be used as a supplement in cases where taxonomic information is not ideal. The latest Silva reference sequence sets [(v138)](https://www.arb-silva.de/no_cache/download/archive/release_138/), including bacteria, archaea and eukaryotes, has been reformatted for using the RDP classifier [(v2.13)](https://sourceforge.net/projects/rdp-classifier/). The latest version of the [Unite](https://github.com/terrimporter/UNITE_ITSClassifier) database was used for the fungi ITS training set.
 
+Training sets and reference sequences are available at [https://github.com/KaiMa-endeavour/RDP-classifier-training-sets/releases](https://github.com/KaiMa-endeavour/RDP-classifier-training-sets/releases). 
+
 ## Training sets overview
 |source|domain|number of unique sequences|ranks|
 |:----:|:----:|:----:|:----:|
@@ -17,8 +19,6 @@ The [RDP native training sets](http://rdp.cme.msu.edu/classifier/classifier.jsp;
 conda install -c bioconda rdp_classifier
 rdp_classifier -Xmx16g classify -f fixrank -t ./training set/rRNAClassifier.properties -o ./rdp_output.txt ./query.fasta
 ```
-Training sets and reference sequences are available at [https://github.com/KaiMa-endeavour/RDP-classifier-training-sets/releases](https://github.com/KaiMa-endeavour/RDP-classifier-training-sets/releases). 
-
 In order to meet the requirements of the function `rdp_classifier train`, the missing fields are filled with `NA`, so it is recommended to delete the `NA` in rdp_output.txt.
 
 ## Reference
