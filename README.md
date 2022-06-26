@@ -1,6 +1,6 @@
 # RDP-classifier-training-sets
 
-The [RDP native training sets](http://rdp.cme.msu.edu/classifier/classifier.jsp;jsessionid=49C6531478DD4D70648EC6FC695B8EA3.10.0.0.9) is usually used for bacteria and archaea, however, the latest Silva reference sequences can be used as a supplement in cases where annotation is not ideal. The latest Silva reference sequences set [(v138)](https://www.arb-silva.de/no_cache/download/archive/release_138/), including bacteria, archaea and eukaryotes, has been reformatted for using the RDP classifier [(v2.13)](https://sourceforge.net/projects/rdp-classifier/). The latest version of the [Unite](https://github.com/terrimporter/UNITE_ITSClassifier) database was used for the fungi ITS training set.
+The [RDP native training sets](http://rdp.cme.msu.edu/classifier/classifier.jsp;jsessionid=49C6531478DD4D70648EC6FC695B8EA3.10.0.0.9) are typically used for bacteria and archaea, however, the latest Silva reference sequences can be used as a supplement in cases where taxonomic information is not ideal. The latest Silva reference sequence sets [(v138)](https://www.arb-silva.de/no_cache/download/archive/release_138/), including bacteria, archaea and eukaryotes, has been reformatted for using the RDP classifier [(v2.13)](https://sourceforge.net/projects/rdp-classifier/). The latest version of the [Unite](https://github.com/terrimporter/UNITE_ITSClassifier) database was used for the fungi ITS training set.
 
 ## Training sets overview
 |source|domain|number of unique sequences|ranks|
