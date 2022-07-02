@@ -8,9 +8,6 @@ id_parent <- function(parent_name, file) {
   }
   id_p
 }
-# fasta <- 'SILVA_138_Bacteria.fa'
-# items_table <- fread('header_table.csv')[, -1]
-# ref_object <- 'Bacteria'
 taxid_rdp <- function(fasta, ref_object, nworker, output_path) {
   require(MicroEcoTk)
   require(tidyfst)
@@ -18,7 +15,6 @@ taxid_rdp <- function(fasta, ref_object, nworker, output_path) {
   require(parallel)
   options(warn = 2)
   fa <- read_fasta(fasta)
-  # rank_class <- data.table(rank = tax$V1 %>% strsplit(';') %>% lapply(rev) %>% sapply('[', 1), calss = tax$V3, depth = tax$V1 %>% strsplit(';') %>% sapply(length))
   header <- word(fa$Header, 2, -1, sep = ' ')
   items <- strsplit(header, ';')
   
@@ -26,7 +22,6 @@ taxid_rdp <- function(fasta, ref_object, nworker, output_path) {
     ranks <- c('domain', 'phylum', 'class', 'order', 'family', 'genus')
   } else if (ref_object %in% 'Eukaryota') {
     ranks <- c('domain', 'kingdom', 'phylum', 'class', 'order', 'family', 'genus')
-    # ranks <- c('domain', 'superkingdom', 'kingdom', 'subkingdom', 'superphylum', 'phylum', 'subphylum', 'infraphylum', 'superclass', 'class', 'subclass', 'infraclass', 'superorder', 'order', 'suborder', 'superfamily', 'family', 'subfamily', 'genus')
   }
   ranks_depth <- data.table(rank = ranks, depth = 1:length(ranks)-1)
   
@@ -38,12 +33,10 @@ taxid_rdp <- function(fasta, ref_object, nworker, output_path) {
   i = 1
   file <- matrix(NA, sum(sapply(items, length)), 1)
   for (r in 1:length(ranks)) {
-    # r=2
     sons <- items_table[, c(get('r'))] %>% table() %>% names()
     rank <- ranks[r]
     
     for (n in 1:length(sons)) {
-      # n = 1
       son <- sons[n]
       if (!is.na(son)) {
         son_l <- ifelse(grepl('\\(', son), gsub('\\(', '\\\\(', son), son)
@@ -76,7 +69,6 @@ taxid_rdp <- function(fasta, ref_object, nworker, output_path) {
   file <- file[!is.na(file)]
   file_non_redundant <- data.table(file[!duplicated(do.call('rbind', strsplit(file, '\\*'))[, -c(1, 3, 4)])])
   if(length(file) == nrow(file_non_redundant)) cat('\n', 'Taxid non redundancy.', '\n')
-  # fwrite(data.table(file), output_path, col.names = F)
   fwrite(file_non_redundant, output_path, col.names = F)
 }
 
