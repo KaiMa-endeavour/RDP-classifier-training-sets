@@ -11,7 +11,6 @@ fa_mod <- function(fasta, nworker, output_path) {
   fa$Header <- gsub('\\"', '', fa$Header)
   lineage <- strsplit(fa$Header, 'Lineage=') %>% sapply('[', 2) %>% word(3, -1, sep = ';')
   header_l <- strsplit(lineage, ';')
-  # header_table <- matrix('', nrow(fa), length(ranks))
   ranks_num <- max(sapply(header_l, length))
   ranks <- c('domain', 'phylum', 'class', 'order', 'family', 'genus')
   
@@ -24,7 +23,6 @@ fa_mod <- function(fasta, nworker, output_path) {
         xx[which(rank == ranks)] <- paste(substr(rank, 1, 1), item, sep = '__')
       }
     }
-    # if (any(which(xx == '12344321') < which(xx != '12344321'))) xx[min(which(which(xx == '12344321') < which(xx != '12344321'))):length(xx)] <- '12344321'
     xx
   }
   cl <- makeCluster(nworker, type = "PSOCK") # PSOCK (windows); FORK (linux);
@@ -37,13 +35,9 @@ fa_mod <- function(fasta, nworker, output_path) {
   cat('\n')
   if(!dir.exists(output_path)) dir.create(output_path)
   
-  # tax_add <- matrix(NA, nrow(header_table)*ncol(header_table), 5)
-  # tax_id <- 1
   for (i in 2:ncol(header_table)) {
-    # i=2
     item_c <- names(table(header_table[, c(get('i'))]))[names(table(header_table[, c(get('i'))])) != '']
     for (r in 1:length(item_c)) {
-      # r=26
       f_num <- table(header_table[which(header_table[, c(get('i'))] == item_c[r]), c(get('i')-1)])
       if (length(f_num) != 1) {
         header_table[, c(get('i'))] <- gsub(pattern = paste0('^', item_c[r], '$'), replacement = '', unlist(header_table[, c(get('i'))]))
@@ -58,15 +52,12 @@ fa_mod <- function(fasta, nworker, output_path) {
       fathers <- header_table[, c(get('i'))-1]
       table(fathers)
       for (n in sons_id) {
-        # n = 69
         father_id <- which(fathers == header_table[n, c(get('i'))-1])
         if (all(header_table[father_id, c(get('i'))] == '') & all(header_table[n, c(get('i')):ncol(header_table)] == '')) {
           cat('Row ID:', n, 'ok! ', header_table[n, c(get('i'))-1], '\n')
         } else {
           xx <- paste(substr(ranks[i], 1, 1), paste('NA', sapply(strsplit(header_table[n, c(get('i'))-1], '__'), '[', 2), sep = '.'), sep = '__')
           header_table[father_id, c(get('i'))] [header_table[father_id, c(get('i'))] == ''] <- xx
-          # tax_add[tax_id, ] <- c('NA', xx, ranks[i], i, paste(header[n], xx, sep = ';'))
-          # tax_id <- tax_id + 1
           cat('\n', 'Row ID:', n, 'add:', xx, '\n', '\n')
         }
       }
