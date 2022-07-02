@@ -17,18 +17,12 @@ lineage <- word(header, 2, -1)
 
 ranks <- c('domain', 'phylum', 'class', 'order', 'family', 'genus')
 w <- c('k', 'p', 'c', 'o', 'f', 'g')
-# header_table <- matrix('', nrow(fa_fungi), length(ranks))
-
-# tax <- matrix(NA, nrow(fa_fungi)*length(ranks), 5)
-
-# tax_id <- 1
 
 famod_item <- function(seq) {
   xx <- rep(12344321, length(ranks))
   s <- unlist(strsplit(lineage[seq], ';'))
   tax <- matrix(NA, length(s), 5)
   for (n in 1:length(s)) {
-    # n = 1
     if (strsplit(s[n], '__') %>% sapply('[', 1)  == w[n]) {
       xx[n] <- paste(ifelse(n == 1, 'd', w[n]), (strsplit(s, '__') %>% sapply('[', 2))[n], sep = '__')
       tax[n, ] <- c(sapply(strsplit(s[n], '__'), '[', 2), xx[n], ranks[n], match(ranks[n], ranks), lineage[seq])
@@ -37,21 +31,6 @@ famod_item <- function(seq) {
   list(xx, as.data.table(tax))
 }
 
-# for (seq in 1:nrow(fa_fungi)) {
-#   # seq = 1
-#   
-#   for (n in 1:length(s)) {
-#     # n = 1
-#     if (strsplit(s[n], '__') %>% sapply('[', 1)  == w[n]) {
-#       header_table[seq, n] <- paste(ifelse(n == 1, 'd', w[n]), (strsplit(s, '__') %>% sapply('[', 2))[n], sep = '__')
-#       if(all(!grepl(paste0('^', header_table[seq, c(get('n'))], '$'), tax[, 2]))) {
-#         tax[tax_id, ] <- c(sapply(strsplit(s[n], '__'), '[', 2), header_table[seq, c(get('n'))], ranks[n], match(ranks[n], ranks), lineage[seq])
-#         tax_id <- tax_id + 1
-#       }
-#     }
-#   }
-#   cat('sequence', paste0(seq, '/', nrow(fa_fungi)), '----', header_table[seq, ], '\n')
-# }
 cl <- makeCluster(nworker, type = "PSOCK") # PSOCK (windows); FORK (linux);
 registerDoParallel(cl)
 header_out <- foreach(seq = 1:nrow(fa_fungi), .packages = c('stringr', 'tidyfst'), .verbose = T) %dopar% famod_item(seq)
@@ -75,10 +54,8 @@ if(!dir.exists(output_path)) dir.create(output_path)
 tax_add <- matrix(NA, nrow(header_table)*ncol(header_table), 5)
 tax_id <- 1
 for (i in 2:ncol(header_table)) {
-  # i=2
   item_c <- names(table(header_table[, c(get('i'))]))[names(table(header_table[, c(get('i'))])) != '']
   for (r in 1:length(item_c)) {
-    # r=26
     f_num <- table(header_table[which(header_table[, c(get('i'))] == item_c[r]), c(get('i')-1)])
     if (length(f_num) != 1) {
       header_table[, c(get('i'))] <- gsub(pattern = paste0('^', item_c[r], '$'), replacement = '', unlist(header_table[, c(get('i'))]))
@@ -93,7 +70,6 @@ for (i in 2:ncol(header_table)) {
     fathers <- header_table[, c(get('i'))-1]
     table(fathers)
     for (n in sons_id) {
-      # n = 69
       father_id <- which(fathers == header_table[n, c(get('i'))-1])
       if (all(header_table[father_id, c(get('i'))] == '') & all(header_table[n, c(get('i')):ncol(header_table)] == '')) {
         cat('Row ID:', n, 'ok! ', header_table[n, c(get('i'))-1], '\n')
