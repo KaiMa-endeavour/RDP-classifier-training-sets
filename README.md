@@ -5,23 +5,23 @@ The [RDP native training sets](http://rdp.cme.msu.edu/classifier/classifier.jsp;
 Training sets and reference sequences are available at [https://github.com/KaiMa-endeavour/RDP-classifier-training-sets/releases](https://github.com/KaiMa-endeavour/RDP-classifier-training-sets/releases). 
 
 ## Training sets overview
-|source|domain|number of unique sequences|ranks|
+|Source|Annotation object|Number of unique sequences|Ranks|
 |:----:|:----:|:----:|:----:|
 |native RDP|Bacteria|2833748|domain, phylum, class, order, family, genus|
 |native RDP|Archaea|145117|domain, phylum, class, order, family, genus|
 |Silva v138|Bacteria|1599148|domain, phylum, class, order, family, genus|
 |Silva v138|Archaea|62300|domain, phylum, class, order, family, genus|
 |Silva v138|Eukaryotes|149373|domain, kingdom, phylum, class, order, family, genus|
-|Unite|Fungi|733093|domain, phylum, class, order, family, genus|
+|Unite|Fungi|733093|kingdom, phylum, class, order, family, genus|
 
 ## How to use
 ```
 conda install -c bioconda rdp_classifier
-rdp_classifier -Xmx16g classify -f fixrank -t ./training set/rRNAClassifier.properties -o ./rdp_output.txt ./query.fasta
+rdp_classifier -Xmx16g classify -t ./training set/rRNAClassifier.properties -o ./rdp_output.txt ./query.fasta
 ```
-In order to meet the requirements of the function `rdp_classifier train`, the missing fields are filled with `NA`, so it is recommended to delete the `NA` in rdp_output.txt.
+In order to fit the function `rdp_classifier train`, the missing fields are filled with `NA`, so it is recommended to delete the `NA` in rdp_output.txt.
 
-## Reference
+## References
 
 Cole, J. R., Wang, Q., Fish, J. A., Chai, B., McGarrell, D. M., Sun, Y., Brown, C. T., Porras-Alfaro, A., Kuske, C. R., & Tiedje, J. M. (2014). Ribosomal Database Project: Data and tools for high throughput rRNA analysis. Nucleic Acids Research, 42(D1), D633–D642. https://doi.org/10.1093/nar/gkt1244
 
