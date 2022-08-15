@@ -1,11 +1,11 @@
 # RDP-classifier-training-sets
 
-The [RDP native training sets](http://rdp.cme.msu.edu/classifier/classifier.jsp;jsessionid=49C6531478DD4D70648EC6FC695B8EA3.10.0.0.9) are typically used for bacteria and archaea, however, the latest Silva reference sequences can be used as a supplement in cases where taxonomic information is not ideal. The latest Silva reference sequence sets [(v138)](https://www.arb-silva.de/no_cache/download/archive/release_138/), including bacteria, archaea and eukaryotes, has been reformatted for using the RDP classifier [(v2.13)](https://sourceforge.net/projects/rdp-classifier/). The latest version of the [Unite](https://github.com/terrimporter/UNITE_ITSClassifier) database was used for the fungi ITS training set.
+The [RDP native training sets](http://rdp.cme.msu.edu/classifier/classifier.jsp;jsessionid=49C6531478DD4D70648EC6FC695B8EA3.10.0.0.9) are typically used for bacteria and archaea, however, the latest Silva reference sequences can be used as a supplement toward the absence of taxonomic information. The latest Silva reference sequence sets [(v138)](https://www.arb-silva.de/no_cache/download/archive/release_138/), including bacteria, archaea and eukaryotes, has been reformatted for using the RDP classifier [(v2.13)](https://sourceforge.net/projects/rdp-classifier/). The latest version of the [Unite](https://github.com/terrimporter/UNITE_ITSClassifier) database was used for the fungi ITS training set.
 
-Training sets and reference sequences are available at [https://github.com/KaiMa-endeavour/RDP-classifier-training-sets/releases](https://github.com/KaiMa-endeavour/RDP-classifier-training-sets/releases). 
+Training sets and reference sequences are available at [https://github.com/KaiMa-endeavour/RDP-classifier-training-sets/releases](https://github.com/KaiMa-endeavour/RDP-classifier-training-sets/releases).
 
 ## Training sets overview
-|Source|Annotation object|Number of unique sequences|Ranks|
+|Sources|Taxonomic objects|Number of unique sequences|Ranks|
 |:----:|:----:|:----:|:----:|
 |native RDP|Bacteria|2833748|domain, phylum, class, order, family, genus|
 |native RDP|Archaea|145117|domain, phylum, class, order, family, genus|
@@ -30,4 +30,3 @@ Nilsson, R. H., Larsson, K.-H., Taylor, A. F. S., Bengtsson-Palme, J., Jeppesen,
 Quast, C., Pruesse, E., Yilmaz, P., Gerken, J., Schweer, T., Yarza, P., Peplies, J., & Glöckner, F. O. (2013). The SILVA ribosomal RNA gene database project: Improved data processing and web-based tools. Nucleic Acids Research, 41(D1), D590–D596. https://doi.org/10.1093/nar/gks1219
 
 Wang, Q., Garrity, G. M., Tiedje, J. M., & Cole, J. R. (2007). Naïve Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy. Applied and Environmental Microbiology, 73(16), 5261–5267. https://doi.org/10.1128/AEM.00062-07
-
