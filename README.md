@@ -1,6 +1,6 @@
 # RDP-classifier-training-sets
 
-The [RDP native training sets](http://rdp.cme.msu.edu/classifier/classifier.jsp;jsessionid=49C6531478DD4D70648EC6FC695B8EA3.10.0.0.9) are typically used for bacteria and archaea, however, the latest Silva reference sequences can be used as a supplement toward the absence of taxonomic information. The latest Silva reference sequence sets [(v138)](https://www.arb-silva.de/no_cache/download/archive/release_138/), including bacteria, archaea and eukaryotes, has been reformatted for using the RDP classifier [(v2.13)](https://sourceforge.net/projects/rdp-classifier/). The latest version of the [Unite](https://github.com/terrimporter/UNITE_ITSClassifier) database was used for the fungi ITS training set.
+The [RDP native training sets](http://rdp.cme.msu.edu/classifier/classifier.jsp;jsessionid=49C6531478DD4D70648EC6FC695B8EA3.10.0.0.9) were commonly employed for amplicon classification of bacteria and archaea. This was supplemented here with the Silva reference sequences, which can be used as a complement to the absence of taxonomic information if necessary. The latest Silva reference sequence sets [(v138)](https://www.arb-silva.de/no_cache/download/archive/release_138/), including bacteria, archaea and eukaryotes, have been reformatted for using the RDP classifier [(v2.13)](https://sourceforge.net/projects/rdp-classifier/). The latest(29.11.2022) [Unite + INSD](https://unite.ut.ee/repository.php) reference sequences were also trained to unify the workflow interface.
 
 Training sets and reference sequences are available at [https://github.com/KaiMa-endeavour/RDP-classifier-training-sets/releases](https://github.com/KaiMa-endeavour/RDP-classifier-training-sets/releases).
 
@@ -12,14 +12,15 @@ Training sets and reference sequences are available at [https://github.com/KaiMa
 |Silva v138|Bacteria|1599148|domain, phylum, class, order, family, genus|
 |Silva v138|Archaea|62300|domain, phylum, class, order, family, genus|
 |Silva v138|Eukaryotes|149373|domain, kingdom, phylum, class, order, family, genus|
-|Unite|Fungi|733093|kingdom, phylum, class, order, family, genus|
+|Unite + INSD|Fungi|5335995|kingdom, phylum, class, order, family, genus, species|
 
 ## How to use
 ```
 conda install -c bioconda rdp_classifier
 rdp_classifier -Xmx16g classify -t ./training set/rRNAClassifier.properties -o ./rdp_output.txt ./query.fasta
 ```
-In order to fit the function `rdp_classifier train`, the missing fields are filled with `NA`, so it is recommended to delete the `NA` in rdp_output.txt.
+
+The missing fields in the headers were filled with `NA` to align the lineages of each individual and to be compatible with the 'rdp_classifier train' function.
 
 ## References
 
