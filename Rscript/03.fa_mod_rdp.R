@@ -74,12 +74,3 @@ fa_mod <- function(fasta, nworker, output_path) {
   write_fasta(fa, paste0(output_path, fasta))
 }
 
-library(optparse)
-option_list <- list(
-  make_option(opt_str = c('--fasta'), type = 'character', default = F), 
-  make_option(opt_str = c('--nworker'), type = 'integer', default = F), 
-  make_option(opt_str = c('--output_path'), type = 'character', default = F)
-)
-args <- parse_args(OptionParser(option_list=option_list, usage = 'RDP fa mod'))
-
-fa_mod(fasta = args$fasta, nworker = args$nworker, output_path = args$output_path)
