@@ -102,15 +102,3 @@ fa_mod <- function(fasta, rank, ref_object, nworker, output_path) {
   fasta <- strsplit(fasta, '\\/') %>% sapply(nth, -1)
   write_fasta(fa, paste0(output_path, fasta))
 }
-
-library(optparse)
-option_list <- list(
-  make_option(opt_str = c('--fasta'), type = 'character', default = F), 
-  make_option(opt_str = c('--rank'), type = 'character', default = F), 
-  make_option(opt_str = c('--ref_object'), type = 'character', default = F), 
-  make_option(opt_str = c('--nworker'), type = 'integer', default = F), 
-  make_option(opt_str = c('--output_path'), type = 'character', default = F)
-)
-args <- parse_args(OptionParser(option_list=option_list, usage = 'fa mod'))
-
-fa_mod(fasta = args$fasta, rank = args$rank, ref_object = args$ref_object, nworker = args$nworker, output_path = args$output_path)
